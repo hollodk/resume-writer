@@ -96,6 +96,8 @@ class ReferenceController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('reference_index');
+        return $this->redirectToRoute('resume_edit', [
+            'id' => $reference->getResume()->getId(),
+        ]);
     }
 }

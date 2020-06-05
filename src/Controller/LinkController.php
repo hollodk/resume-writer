@@ -96,6 +96,8 @@ class LinkController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('link_index');
+        return $this->redirectToRoute('resume_edit', [
+            'id' => $link->getResume()->getId(),
+        ]);
     }
 }

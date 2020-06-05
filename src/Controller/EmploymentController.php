@@ -96,6 +96,8 @@ class EmploymentController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('employment_index');
+        return $this->redirectToRoute('resume_edit', [
+            'id' => $employment->getResume()->getId(),
+        ]);
     }
 }

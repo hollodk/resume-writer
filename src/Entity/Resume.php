@@ -145,6 +145,11 @@ class Resume
      */
     private $educations;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $profileImage;
+
 
     public function __construct()
     {
@@ -608,6 +613,18 @@ class Resume
                 $education->setResume(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProfileImage(): ?string
+    {
+        return $this->profileImage;
+    }
+
+    public function setProfileImage(?string $profileImage): self
+    {
+        $this->profileImage = $profileImage;
 
         return $this;
     }

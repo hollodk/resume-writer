@@ -20,6 +20,7 @@ use App\Form\ResumeType;
 use App\Form\SkillType;
 use App\Repository\ResumeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -60,9 +61,37 @@ class ResumeController extends AbstractController
      */
     public function show(Resume $resume): Response
     {
+        $parsedown = new \Parsedown();
+
         return $this->render('resume/show.html.twig', [
             'resume' => $resume,
+            'parsedown' => $parsedown,
         ]);
+    }
+
+    /**
+     * @Route("/{id}/imageremove", name="resume_imageremove", methods={"GET","POST"})
+     */
+    public function imageremove(Request $request, Resume $resume): Response
+    {
+        $resume->setProfileImage(null);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('resume_edit', [
+            'id' => $resume->getId(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/image", name="resume_image", methods={"GET","POST"})
+     */
+    public function image(Request $request, Resume $resume): Response
+    {
+        $response = new Response(base64_decode($resume->getProfileImage()));
+        $response->headers->set('Content-Type', 'image/jpg');
+
+        return $response;
     }
 
     /**
@@ -74,6 +103,25 @@ class ResumeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('resume_edit', [
+                'id' => $resume->getId(),
+            ]);
+        }
+
+        $imageForm = $this->createFormBuilder()
+            ->add('profileImage', FileType::class)
+            ->getForm()
+            ;
+
+        $imageForm->handleRequest($request);
+        if ($imageForm->isSubmitted() && $imageForm->isValid()) {
+            $data = $imageForm->getData();
+
+            $content = base64_encode(file_get_contents($data['profileImage']->getPathName()));
+            $resume->setProfileImage($content);
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('resume_edit', [
@@ -133,6 +181,7 @@ class ResumeController extends AbstractController
         return $this->render('resume/edit.html.twig', [
             'resume' => $resume,
             'form' => $form->createView(),
+            'image_form' => $imageForm->createView(),
             'course_form' => $courseForm->createView(),
             'education_form' => $educationForm->createView(),
             'employment_form' => $employmentForm->createView(),

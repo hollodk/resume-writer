@@ -124,4 +124,33 @@ class Skill
     {
         $this->setUpdatedAt(new \DateTime());
     }
+
+    public function getProgress()
+    {
+        $progress = 0;
+
+        switch ($this->getLevel()) {
+        case 'expert':
+            $progress = 100;
+            break;
+
+        case 'experienced':
+            $progress = 85;
+            break;
+
+        case 'skillful':
+            $progress = 70;
+            break;
+
+        case 'beginner':
+            $progress = 50;
+            break;
+
+        case 'novice':
+            $progress = 30;
+            break;
+        }
+
+        return $progress;
+    }
 }

@@ -96,6 +96,8 @@ class SkillController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('skill_index');
+        return $this->redirectToRoute('resume_edit', [
+            'id' => $skill->getResume()->getId(),
+        ]);
     }
 }

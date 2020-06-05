@@ -1,30 +1,23 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Id</th>
             <th>JobTitle</th>
             <th>Employer</th>
             <th>Start</th>
             <th>End</th>
             <th>City</th>
-            <th>CreatedAt</th>
-            <th>UpdatedAt</th>
-            <th>actions</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         {% for employment in employments %}
         <tr>
-            <td>{{ employment.id }}</td>
             <td>{{ employment.jobTitle }}</td>
             <td>{{ employment.employer }}</td>
             <td>{{ employment.start }}</td>
             <td>{{ employment.end }}</td>
             <td>{{ employment.city }}</td>
-            <td>{{ employment.createdAt ? employment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            <td>{{ employment.updatedAt ? employment.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            <td>
-                <a href="{{ path('employment_show', {'id': employment.id}) }}">show</a>
+            <td class="text-right">
                 <a href="{{ path('employment_edit', {'id': employment.id}) }}">edit</a>
             </td>
         </tr>

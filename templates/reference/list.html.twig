@@ -1,28 +1,21 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Id</th>
             <th>FullName</th>
             <th>Company</th>
             <th>Phone</th>
             <th>Email</th>
-            <th>CreatedAt</th>
-            <th>UpdatedAt</th>
-            <th>actions</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         {% for reference in references %}
         <tr>
-            <td>{{ reference.id }}</td>
             <td>{{ reference.fullName }}</td>
             <td>{{ reference.company }}</td>
             <td>{{ reference.phone }}</td>
             <td>{{ reference.email }}</td>
-            <td>{{ reference.createdAt ? reference.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            <td>{{ reference.updatedAt ? reference.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             <td>
-                <a href="{{ path('reference_show', {'id': reference.id}) }}">show</a>
                 <a href="{{ path('reference_edit', {'id': reference.id}) }}">edit</a>
             </td>
         </tr>

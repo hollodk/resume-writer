@@ -17,7 +17,11 @@ class EmploymentType extends AbstractType
             ->add('start')
             ->add('end')
             ->add('city')
-            ->add('description')
+            ->add('description', null, [
+                'attr' => [
+                    'rows' => 20,
+                ],
+            ])
         ;
     }
 

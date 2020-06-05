@@ -96,6 +96,8 @@ class CourseController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('course_index');
+        return $this->redirectToRoute('resume_edit', [
+            'id' => $course->getResume()->getId(),
+        ]);
     }
 }

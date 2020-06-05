@@ -24,17 +24,33 @@ iframe {
 <div class="row">
     <div class="col-sm-4">
         <h1>Edit Resume</h1>
-        <span data-toggle="modal" data-target="#manage-links">[ Manage Links ]</span>
-        <span data-toggle="modal" data-target="#manage-skills">[ Manage Skills ]</span>
-        <span data-toggle="modal" data-target="#manage-languages">[ Manage Languages ]</span>
-        <span data-toggle="modal" data-target="#manage-references">[ Manage References ]</span>
-        <span data-toggle="modal" data-target="#manage-educations">[ Manage Educations ]</span>
-        <span data-toggle="modal" data-target="#manage-courses">[ Manage Courses ]</span>
-        <span data-toggle="modal" data-target="#manage-employments">[ Manage Employment ]</span>
+        <div class="mb-2">
+            <p>Manage</p>
+            <a href="" data-toggle="modal" data-target="#manage-links">Links</a> |
+            <a href="" data-toggle="modal" data-target="#manage-skills">Skills</a> |
+            <a href="" data-toggle="modal" data-target="#manage-languages">Languages</a> |
+            <a href="" data-toggle="modal" data-target="#manage-references">References</a> |
+            <a href="" data-toggle="modal" data-target="#manage-educations">Educations</a> |
+            <a href="" data-toggle="modal" data-target="#manage-courses">Courses</a> |
+            <a href="" data-toggle="modal" data-target="#manage-employments">Employment</a>
+        </div>
+
+        {{ form_start(image_form) }}
+        <div class="card mb-2">
+            <div class="card-header">
+                Profile Image
+            </div>
+            <div class="card-body">
+                {{ form_widget(image_form) }}
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Upload</button>
+                <a onclick="return confirm('Are you sure?')" class="btn btn-danger" href="{{ path('resume_imageremove', {'id':resume.id}) }}">Remove Image</a>
+            </div>
+        </div>
+        {{ form_end(image_form) }}
 
         {{ include('resume/_form.html.twig', {'button_label': 'Update'}) }}
-
-        <a href="{{ path('resume_index') }}">back to list</a>
 
         {{ include('resume/_delete_form.html.twig') }}
     </div>

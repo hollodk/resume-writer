@@ -16,11 +16,11 @@ class SkillType extends AbstractType
             ->add('skill')
             ->add('level', ChoiceType::class, [
                 'choices' => [
-                    'Expert' => '100',
-                    'Experienced' => '85',
-                    'Skillful' => '70',
-                    'Beginner' => '50',
-                    'Novice' => '30',
+                    'Expert' => 'expert',
+                    'Experienced' => 'experienced',
+                    'Skillful' => 'skillful',
+                    'Beginner' => 'beginner',
+                    'Novice' => 'novice',
                 ],
             ])
         ;

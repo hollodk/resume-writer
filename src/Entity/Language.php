@@ -125,4 +125,39 @@ class Language
     {
         $this->setUpdatedAt(new \DateTime());
     }
+
+    public function getProgress()
+    {
+        $progress = 0;
+
+        switch ($this->getLevel()) {
+        case 'native speaker':
+        case 'c2':
+        case 'c1':
+            $progress = 100;
+            break;
+
+        case 'highly proficient':
+        case 'b2':
+            $progress = 80;
+            break;
+
+        case 'very good command':
+        case 'b1':
+            $progress = 60;
+            break;
+
+        case 'good working knowledge':
+        case 'a2':
+            $progress = 40;
+            break;
+
+        case 'working knowledge':
+        case 'a1':
+            $progress = 20;
+            break;
+        }
+
+        return $progress;
+    }
 }

@@ -96,6 +96,8 @@ class LanguageController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('language_index');
+        return $this->redirectToRoute('resume_edit', [
+            'id' => $language->getResume()->getId(),
+        ]);
     }
 }
