@@ -1,0 +1,113 @@
+<html>
+    <head>
+        <title>Resume</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<style>
+.left-col {
+    padding: 70px;
+}
+.right-col {
+    color: #fff;
+    height: 100%;
+    padding: 150px 50px 0 50px;
+    background-color: {{ resume.color }};
+}
+a {
+    color: #fff;
+    text-decoration: underline;
+}
+.bg-white {
+    background-color: #fff;
+}
+.bg-grey {
+    background-color: #9d9d9d;
+}
+</style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" style="height:100%">
+                <div class="col-8 left-col">
+                    <div class="mb-5">
+                        <h1>{{ resume.firstName }} {{ resume.lastName }}</h1>
+                        {{ resume.jobTitle }}
+                    </div>
+
+                    <div class="mb-5">
+                        <h2>Profile</h2>
+                        <p>{{ resume.professionalSummary|nl2br }}</p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h2>Employment History</h2>
+                    </div>
+
+                    <div class="mb-5">
+                        <h2>References</h2>
+                        <p>References available upon request</p>
+                    </div>
+                </div>
+
+                <div class="col-4 right-col">
+                    <div class="mb-5">
+                        <div class="mb-3">
+                            <p class="h4">Details</p>
+                            <p>{{ resume.street }}, {{ resume.city }}, {{ resume.postalCode }}
+                            <br>{{ resume.country }}
+                            <br>{{ resume.phone }}
+                            <br>{{ resume.email }}
+                            </p>
+                        </div>
+
+                        <div class="mb-3">
+                            <p class="h6 text-muted">Nationality</p>
+                            {{ resume.nationality }}
+                        </div>
+
+                        <div class="mb-3">
+                            <p class="h6 text-muted">Driving License</p>
+                            {{ resume.drivingLicense }}
+                        </div>
+
+                        <div class="mb-3">
+                            <p class="h6 text-muted">Date / Place of birth</p>
+                            <p>{{ resume.dateOfBirth }}
+                            <br>{{ resume.placeOfBirth }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <p class="h4">Links</p>
+                        {% for link in resume.links %}
+                        <a target="_open" href="{{ link.link }}">{{ link.label }}</a>
+                        <svg class="bi bi-link-45deg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                            <path d="M5.712 6.96l.167-.167a1.99 1.99 0 0 1 .896-.518 1.99 1.99 0 0 1 .518-.896l.167-.167A3.004 3.004 0 0 0 6 5.499c-.22.46-.316.963-.288 1.46z"/>
+                            <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z"/>
+                            <path d="M10 9.5a2.99 2.99 0 0 0 .288-1.46l-.167.167a1.99 1.99 0 0 1-.896.518 1.99 1.99 0 0 1-.518.896l-.167.167A3.004 3.004 0 0 0 10 9.501z"/>
+                        </svg>
+                        <br>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mb-5">
+                        <p class="h4">Skills</p>
+                        {% for skill in resume.skills %}
+                        {{ skill.skill }}
+                        <div class="progress bg-grey mb-3">
+                            <div class="progress-bar bg-white" style="width:{{ skill.level }}%" role="progressbar" aria-valuenow="{{ skill.level }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mb-5">
+                        <p class="h4">Hobbies</p>
+                        <p>{{ resume.hobbies|nl2br }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

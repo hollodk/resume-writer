@@ -1,0 +1,201 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Resume{% endblock %}
+
+{% block stylesheets %}
+<style>
+.right-col {
+    background-color: #eaeaea;
+    padding:30px;
+}
+
+iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+    webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-4">
+        <h1>Edit Resume</h1>
+        <span data-toggle="modal" data-target="#manage-links">[ Manage Links ]</span>
+        <span data-toggle="modal" data-target="#manage-skills">[ Manage Skills ]</span>
+        <span data-toggle="modal" data-target="#manage-languages">[ Manage Languages ]</span>
+        <span data-toggle="modal" data-target="#manage-references">[ Manage References ]</span>
+        <span data-toggle="modal" data-target="#manage-educations">[ Manage Educations ]</span>
+        <span data-toggle="modal" data-target="#manage-courses">[ Manage Courses ]</span>
+        <span data-toggle="modal" data-target="#manage-employments">[ Manage Employment ]</span>
+
+        {{ include('resume/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('resume_index') }}">back to list</a>
+
+        {{ include('resume/_delete_form.html.twig') }}
+    </div>
+
+    <div class="col-sm-8 right-col">
+        <iframe src="{{ path('resume_show', {'id':resume.id}) }}"></iframe>
+    </div>
+</div>
+
+{{ form_start(course_form) }}
+<div class="modal fade" id="manage-courses" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Manage Courses</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% include "course/list.html.twig" with {'courses':resume.courses} %}
+                {{ form_widget(course_form) }}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(course_form) }}
+
+{{ form_start(education_form) }}
+<div class="modal fade" id="manage-educations" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Manage Educations</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% include "education/list.html.twig" with {'educations':resume.educations} %}
+                {{ form_widget(education_form) }}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(education_form) }}
+
+{{ form_start(employment_form) }}
+<div class="modal fade" id="manage-employments" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Manage Employments</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% include "employment/list.html.twig" with {'employments':resume.employments} %}
+                {{ form_widget(employment_form) }}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(employment_form) }}
+
+{{ form_start(language_form) }}
+<div class="modal fade" id="manage-languages" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Manage Languages</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% include "language/list.html.twig" with {'languages':resume.languages} %}
+                {{ form_widget(language_form) }}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(language_form) }}
+
+{{ form_start(link_form) }}
+<div class="modal fade" id="manage-links" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Manage Links</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% include "link/list.html.twig" with {'links':resume.links} %}
+                {{ form_widget(link_form) }}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(link_form) }}
+
+{{ form_start(reference_form) }}
+<div class="modal fade" id="manage-references" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Manage References</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% include "reference/list.html.twig" with {'references':resume.references} %}
+                {{ form_widget(reference_form) }}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(reference_form) }}
+
+{{ form_start(skill_form) }}
+<div class="modal fade" id="manage-skills" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Manage Skills</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% include "skill/list.html.twig" with {'skills':resume.skills} %}
+                {{ form_widget(skill_form) }}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(skill_form) }}
+
+{% endblock %}

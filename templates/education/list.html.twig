@@ -1,0 +1,37 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>School</th>
+            <th>Degree</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>City</th>
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for education in educations %}
+        <tr>
+            <td>{{ education.id }}</td>
+            <td>{{ education.school }}</td>
+            <td>{{ education.degree }}</td>
+            <td>{{ education.start }}</td>
+            <td>{{ education.end }}</td>
+            <td>{{ education.city }}</td>
+            <td>{{ education.createdAt ? education.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ education.updatedAt ? education.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            <td>
+                <a href="{{ path('education_show', {'id': education.id}) }}">show</a>
+                <a href="{{ path('education_edit', {'id': education.id}) }}">edit</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="10">no records found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

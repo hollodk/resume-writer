@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employment index{% endblock %}
+
+{% block body %}
+    <h1>Employment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>JobTitle</th>
+                <th>Employer</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>City</th>
+                <th>Description</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employment in employments %}
+            <tr>
+                <td>{{ employment.id }}</td>
+                <td>{{ employment.jobTitle }}</td>
+                <td>{{ employment.employer }}</td>
+                <td>{{ employment.start }}</td>
+                <td>{{ employment.end }}</td>
+                <td>{{ employment.city }}</td>
+                <td>{{ employment.description }}</td>
+                <td>{{ employment.createdAt ? employment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ employment.updatedAt ? employment.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('employment_show', {'id': employment.id}) }}">show</a>
+                    <a href="{{ path('employment_edit', {'id': employment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('employment_new') }}">Create new</a>
+{% endblock %}
