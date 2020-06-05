@@ -67,8 +67,11 @@ a:hover {
                     <div class="mb-5">
                         <h2>Employment History</h2>
                         {% for employment in resume.employments %}
-                        <p><b>{{ employment.jobTitle }}, {{ employment.city }}</b>
-                        <br><span class="text-muted">{{ employment.start }} - {{ employment.end }}</span>
+                        <p><b>{{ employment.jobTitle }}{% if employment.employer %} at {{ employment.employer }}{% endif %}</b>
+                        <br><span class="text-muted">
+                             {{ employment.city }}
+                            <br>{{ employment.start }} - {{ employment.end }}
+                        </span>
                         </p>
                         <p>{{ employment.description|markdown }}</p>
                         {% endfor %}

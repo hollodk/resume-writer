@@ -22,6 +22,9 @@ class ResumeType extends AbstractType
                     'Grey' => '#1B212F',
                 ],
             ])
+            ->add('slug', null, [
+                'help' => 'Suffix for public sharing',
+            ])
             ->add('jobTitle')
             ->add('firstName')
             ->add('lastName')

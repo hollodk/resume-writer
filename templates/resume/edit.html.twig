@@ -25,7 +25,6 @@ iframe {
     <div class="col-sm-4">
         <h1>Edit Resume</h1>
         <div class="mb-2">
-            <p>Manage</p>
             <a href="" data-toggle="modal" data-target="#manage-links">Links</a> |
             <a href="" data-toggle="modal" data-target="#manage-skills">Skills</a> |
             <a href="" data-toggle="modal" data-target="#manage-languages">Languages</a> |
@@ -33,6 +32,15 @@ iframe {
             <a href="" data-toggle="modal" data-target="#manage-educations">Educations</a> |
             <a href="" data-toggle="modal" data-target="#manage-courses">Courses</a> |
             <a href="" data-toggle="modal" data-target="#manage-employments">Employment</a>
+        </div>
+
+        <div class="card mb-2">
+            <div class="card-header">
+                Public Profile
+            </div>
+            <div class="card-body">
+                <a href="{{ path('app_default_resume', {'slug':resume.slug}) }}">{{ url('app_default_resume', {'slug':resume.slug}) }}</a>
+            </div>
         </div>
 
         {{ form_start(image_form) }}

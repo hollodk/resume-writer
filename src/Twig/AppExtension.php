@@ -17,7 +17,7 @@ class AppExtension extends AbstractExtension
 
     public function markdown($value)
     {
-        $parseDown = new \ParseDown();
+        $parseDown = new \Parsedown();
 
         return $parseDown->text($value);
     }
