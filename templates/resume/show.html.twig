@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Resume</title>
+        <title>Resume - {{ resume.slug }}</title>
 
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -8,12 +8,18 @@
 * {
     font-family: 'Noto Sans JP', sans-serif;
 }
+@page {
+    margin: 0;
+}
+body {
+    -webkit-print-color-adjust: exact !important;
+}
 .left-col {
     padding: 70px;
 }
 .right-col {
     color: #fff;
-    min-height: 100%;
+    height: 200%;
     padding: 150px 50px 50px 50px;
     background-color: {{ resume.color }};
 }
@@ -44,6 +50,9 @@ a:hover {
 .progress {
     height: 10px;
 }
+.text-block {
+    page-break-inside: avoid;
+}
 </style>
     </head>
     <body>
@@ -67,13 +76,15 @@ a:hover {
                     <div class="mb-5">
                         <h2>Employment History</h2>
                         {% for employment in resume.employments %}
-                        <p><b>{{ employment.jobTitle }}{% if employment.employer %} at {{ employment.employer }}{% endif %}</b>
-                        <br><span class="text-muted">
-                             {{ employment.city }}
-                            <br>{{ employment.start }} - {{ employment.end }}
-                        </span>
-                        </p>
-                        <p>{{ employment.description|markdown }}</p>
+                        <div class="text-block">
+                            <p><b>{{ employment.jobTitle }}{% if employment.employer %} at {{ employment.employer }}{% endif %}</b>
+                            <br><span class="text-muted">
+                                {{ employment.city }}
+                                <br>{{ employment.start }} - {{ employment.end }}
+                            </span>
+                            </p>
+                            <p>{{ employment.description|markdown }}</p>
+                        </div>
                         {% endfor %}
                     </div>
 
@@ -81,15 +92,17 @@ a:hover {
                     <div class="mb-5">
                         <h2>Education</h2>
                         {% for education in resume.educations %}
-                        <p><b>{{ education.degree }}, {{ education.school }}</b>
-                        <br><span class="text-muted">{{ education.start }} - {{ education.end }}</span>
-                        </p>
-                        <p>{{ education.description|markdown }}</p>
+                        <div class="text-block">
+                            <p><b>{{ education.degree }}, {{ education.school }}</b>
+                            <br><span class="text-muted">{{ education.start }} - {{ education.end }}</span>
+                            </p>
+                            <p>{{ education.description|markdown }}</p>
+                        </div>
                         {% endfor %}
                     </div>
                     {% endif %}
 
-                    <div class="mb-5">
+                    <div class="mb-5 text-block">
                         <h2>References</h2>
                         {% for reference in resume.references %}
                         <p><b>{{ reference.fullName }} from {{ reference.company }}</b>
@@ -101,7 +114,7 @@ a:hover {
                     </div>
 
                     {% if resume.courses|length > 0 %}
-                    <div class="mb-5">
+                    <div class="mb-5 text-block">
                         <h2>Courses</h2>
                         {% for course in resume.courses %}
                         <p><b>{{ course.course }}, {{ course.institution }}</b>
@@ -148,7 +161,7 @@ a:hover {
                         {% endfor %}
                     </div>
 
-                    <div class="mb-5">
+                    <div class="mb-5 text-block">
                         <p class="h4">Skills</p>
                         {% for skill in resume.skills %}
                         {{ skill.skill }}
@@ -158,12 +171,12 @@ a:hover {
                         {% endfor %}
                     </div>
 
-                    <div class="mb-5">
+                    <div class="mb-5 text-block">
                         <p class="h4">Hobbies</p>
                         <p>{{ resume.hobbies|markdown }}</p>
                     </div>
 
-                    <div class="mb-5">
+                    <div class="mb-5 text-block">
                         <p class="h4">Languages</p>
                         {% for language in resume.languages %}
                         {{ language.language }}
